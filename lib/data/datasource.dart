@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class DataSource {
@@ -40,8 +39,13 @@ class DataSource {
       "from": username,
       "text": text,
     });
+  }
 
-    Map<String, dynamic> data =
-        jsonDecode(response.body) as Map<String, dynamic>;
+  Future makeRoom(String from, String to) async {
+    var response =
+        await http.post(Uri.parse('http://127.0.0.1:8080/api/room/'), body: {
+      "from": from,
+      "to": to,
+    });
   }
 }

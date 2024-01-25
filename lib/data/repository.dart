@@ -28,4 +28,10 @@ class Repository {
     //print(a);
     return a;
   }
+
+  Future makeRoom(String from, String to) async {
+    var a = await _dataSource.makeRoom(from, to);
+    //print(a);
+    return a;
+  }
 }

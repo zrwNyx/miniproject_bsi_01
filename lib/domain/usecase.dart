@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:mini_project/data/datasource.dart';
 import 'package:mini_project/data/repository.dart';
 import 'package:mini_project/entity.dart';
@@ -11,7 +10,7 @@ class Usecase {
   Future<List?> getChatRoom(String username) async {
     var b = await _repository!.getChatRoom(username);
     var data = jsonDecode(b!) as Map<String, dynamic>;
-    var a = data!['data'] as Map<String, dynamic>;
+    var a = data['data'] as Map<String, dynamic>;
     var c = a['rooms'] as List<dynamic>;
     //print(data);
     return c;
@@ -21,7 +20,7 @@ class Usecase {
     List<dynamic> listUsername = [];
     var b = await _repository!.getChat(username);
     var data = jsonDecode(b!) as Map<String, dynamic>;
-    var a = data!['data'] as List<dynamic>;
+    var a = data['data'] as List<dynamic>;
     a.forEach((element) {
       listUsername.add(element['users']);
     });
@@ -46,7 +45,7 @@ class Usecase {
   Future<List<Message>> getListChat(String id) async {
     var b = await _repository!.getListChat(id);
     var data = jsonDecode(b!) as Map<String, dynamic>;
-    var c = data!['data'] as Map<String, dynamic>;
+    var c = data['data'] as Map<String, dynamic>;
     var d = c['messages'] as List<dynamic>;
     List<Message> messages =
         d.map((jsonItem) => Message.fromJson(jsonItem)).toList();
@@ -56,6 +55,11 @@ class Usecase {
 
   Future sendData(String id, String username, String text) async {
     var myResponse = await _repository?.sendChat(id, username, text);
+    return myResponse;
+  }
+
+  Future makeRoom(String from, String to) async {
+    var myResponse = await _repository?.makeRoom(from, to);
     return myResponse;
   }
 }
