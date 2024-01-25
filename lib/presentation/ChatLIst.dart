@@ -5,7 +5,11 @@ import 'package:mini_project/presentation/ChatPage.dart';
 class ChatList extends StatefulWidget {
   final String roomID;
   final String userName;
-  const ChatList({required this.userName, required this.roomID});
+  final String selectedName;
+  const ChatList(
+      {required this.userName,
+      required this.roomID,
+      required this.selectedName});
 
   @override
   State<ChatList> createState() => _ChatListState();
@@ -38,7 +42,14 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat List'),
+        title: Row(
+          children: [
+            CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            Text(widget.selectedName),
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -60,14 +71,6 @@ class _ChatListState extends State<ChatList> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(children: [
-                      Text(
-                        message.username,
-                        style: TextStyle(
-                          color: isMe ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 5),
                       Text(message.text),
                     ]),
                   ),

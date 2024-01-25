@@ -123,6 +123,7 @@ class _ChatPageState extends State<ChatPage> {
                       builder: (context) => ChatList(
                             userName: widget.username,
                             roomID: a,
+                            selectedName: chat[index],
                           )),
                 );
               },
